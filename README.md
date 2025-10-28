@@ -80,7 +80,6 @@ This template is designed to be easily customizable for your specific use case:
 - **Storage**: Supabase Storage
 - **Payments**: Stripe
 - **AI**: OpenAI API
-- **Social Media**: Late API
 - **Analytics**: PostHog
 - **Deployment**: Vercel
 
@@ -479,7 +478,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Supabase team for the backend platform
 - Stripe team for the payment infrastructure
 - OpenAI for AI capabilities
-- Late API for social media integration
 - shadcn/ui for beautiful components
 
 ## 📫 Support

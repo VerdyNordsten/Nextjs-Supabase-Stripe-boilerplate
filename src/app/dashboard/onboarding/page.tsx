@@ -84,29 +84,49 @@ export default function OnboardingPage() {
 
   // Event handlers
   const handleCreateBrand = async () => {
-    if (!brandName.trim() || !user?.id) return
-    
+    if (!brandName.trim()) return
+
     setIsLoading(true)
     try {
-      const { error: brandError } = await supabase
-        .from('brands')
-        .insert({
-          user_id: user.id,
-          name: brandName,
-          is_default: true
-        })
-        .select()
-        .single()
-      
-      if (brandError) throw brandError
-      
+      // Check if user_preferences record exists first
+      const { data: existing } = await supabase
+        .from('user_preferences')
+        .select('id')
+        .eq('user_id', user?.id)
+        .maybeSingle()
+
+      if (existing) {
+        // Update existing record
+        const { error: updateError } = await supabase
+          .from('user_preferences')
+          .update({
+            brand_name: brandName,
+            updated_at: new Date().toISOString()
+          })
+          .eq('user_id', user?.id)
+
+        if (updateError) throw updateError
+      } else {
+        // Insert new record
+        const { error: insertError } = await supabase
+          .from('user_preferences')
+          .insert({
+            user_id: user?.id,
+            brand_name: brandName,
+            has_completed_onboarding: false
+          })
+
+        if (insertError) throw insertError
+      }
+
       triggerConfetti()
-      
+
       setTimeout(() => {
         setCurrentStep(3)
       }, 500)
     } catch (error) {
-      console.error('Error creating brand:', error)
+      console.error('Error saving brand preference:', error)
+      alert('Failed to save brand name. Please try again.')
     } finally {
       setIsLoading(false)
     }

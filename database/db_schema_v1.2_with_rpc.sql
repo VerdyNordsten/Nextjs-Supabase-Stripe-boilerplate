@@ -35,6 +35,7 @@ create table if not exists public.user_preferences (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null,
   has_completed_onboarding boolean default false,
+  brand_name text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   constraint user_preferences_user_id_key unique (user_id),

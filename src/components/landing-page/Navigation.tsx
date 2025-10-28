@@ -71,6 +71,14 @@ export function Navigation({ onStartTrial, isCreatingTrial }: NavigationProps) {
           <div className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-slate-700 hover:text-blue-600 transition font-medium">Features</a>
             <a href="#pricing" className="text-slate-700 hover:text-blue-600 transition font-medium">Pricing</a>
+            <a
+              href="https://www.buymeacoffee.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-700 hover:text-amber-600 transition font-medium flex items-center gap-1"
+            >
+              ☕ Buy Me Coffee
+            </a>
             
             {!user ? (
               <>
@@ -175,19 +183,28 @@ export function Navigation({ onStartTrial, isCreatingTrial }: NavigationProps) {
 
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-slate-200 py-4 space-y-3">
-            <a 
-              href="#features" 
+            <a
+              href="#features"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg transition"
             >
               Features
             </a>
-            <a 
-              href="#pricing" 
+            <a
+              href="#pricing"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg transition"
             >
               Pricing
+            </a>
+            <a
+              href="https://www.buymeacoffee.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2 px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg transition"
+            >
+              ☕ Buy Me Coffee
             </a>
             
             {!user ? (
