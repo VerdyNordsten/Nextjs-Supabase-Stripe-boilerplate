@@ -134,6 +134,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_
 NEXT_PUBLIC_STRIPE_BUTTON_ID=buy_btn_
 STRIPE_SECRET_KEY=sk_live_
 STRIPE_WEBHOOK_SECRET=whsec_
+STRIPE_PRICE_ID=price_
 
 # Analytics 
 NEXT_PUBLIC_POSTHOG_KEY=your_posthog_key
@@ -187,9 +188,6 @@ Cloudflare Turnstile provides user-friendly, privacy-preserving bot protection:
 
 **Target Hostname**: `[your-project].supabase.co` (already configured in next.config.js)
 
-**Note**: The avatar bucket storage URL is already configured in next.config.js:
-- `https://[your-project].supabase.co/storage/v1/object/public/**` (for avatar images)
-
 #### b. Configure URLs in Supabase
 - Go to Project Settings > General > Configuration
 - **Site URL**: Set to your application URL (e.g., `https://yourdomain.com` or `http://localhost:3000` for development)
@@ -201,12 +199,12 @@ Cloudflare Turnstile provides user-friendly, privacy-preserving bot protection:
   - `http://localhost:3000/auth/callback/` (development wildcard)
   - `https://yourdomain.com/auth/callback/` (production wildcard)
 
-#### d. Set up Authentication Providers
+#### c. Set up Authentication Providers
 - Go to Authentication > Providers
 - Configure your desired OAuth providers (Google, GitHub, etc.)
 - Update Site URL and Redirect URLs to match your domain
 
-#### e. Google OAuth Setup Tutorial
+#### d. Google OAuth Setup Tutorial
 
 Follow these steps to configure Google OAuth for your application:
 
@@ -243,7 +241,7 @@ Follow these steps to configure Google OAuth for your application:
    - Try to sign up/login with Google
    - Verify the redirect works correctly
 
-#### f. Storage Setup - Avatar Bucket
+#### e. Storage Setup - Avatar Bucket
 
 Create a storage bucket for user avatar images:
 
@@ -255,7 +253,7 @@ Create a storage bucket for user avatar images:
    - **File size limit**: 5MB (recommended for avatars)
    - **Allowed MIME types**: `image/jpeg`, `image/png`, `image/webp`, `image/gif`
 
-#### g. Database Setup
+#### f. Database Setup
 - Enable Row Level Security (RLS) for all tables
 - Create policies for authenticated users and service roles
 - Run the initial schema from [`database/db_schema_v1.2_with_rpc.sql`](database/db_schema_v1.2_with_rpc.sql)

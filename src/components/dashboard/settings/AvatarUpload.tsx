@@ -144,7 +144,7 @@ export const AvatarUpload = forwardRef<AvatarUploadRef, AvatarUploadProps>(({
 
       return {
         url: data.publicUrl,
-        key: filePath // Store only the path, not the full URL
+        key: `avatar/${filePath}` // Store with avatar/ prefix in database
       }
     } catch (err) {
       console.error('Error uploading avatar:', err)
