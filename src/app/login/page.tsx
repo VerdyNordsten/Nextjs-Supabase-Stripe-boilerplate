@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Zap, ArrowRight } from 'lucide-react';
@@ -11,6 +12,7 @@ import Script from 'next/script';
 
 export default function LoginPage() {
   const { user, isLoading: authLoading, signInWithGoogle, signInWithEmail } = useAuth();
+  const { resolvedTheme } = useTheme();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState('');
@@ -133,14 +135,15 @@ export default function LoginPage() {
   };
 
   if (isLoading || authLoading) {
+    const isDark = resolvedTheme === 'dark';
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-purple-50 via-white to-blue-50">
+      <div className={`min-h-screen flex flex-col items-center justify-center ${isDark ? 'bg-linear-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-linear-to-br from-purple-50 via-white to-blue-50'}`}>
         <div className="relative mb-6">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-blue-600"></div>
-          <div className="absolute inset-0 rounded-full h-16 w-16 border-4 border-transparent border-r-purple-600 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1s' }}></div>
+          <div className={`animate-spin rounded-full h-16 w-16 border-4 ${isDark ? 'border-slate-600 border-t-blue-400' : 'border-gray-200 border-t-blue-600'}`}></div>
+          <div className={`absolute inset-0 rounded-full h-16 w-16 border-4 border-transparent ${isDark ? 'border-r-purple-400' : 'border-r-purple-600'} animate-spin`} style={{ animationDirection: 'reverse', animationDuration: '1s' }}></div>
         </div>
-        <div className="text-gray-900 text-xl font-semibold">Signing you in...</div>
-        <div className="text-gray-600 text-sm mt-2">Please wait a moment</div>
+        <div className={`text-xl font-semibold ${isDark ? 'text-slate-100' : 'text-gray-900'}`}>Signing you in...</div>
+        <div className={`text-sm mt-2 ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>Please wait a moment</div>
       </div>
     );
   }
@@ -152,21 +155,21 @@ export default function LoginPage() {
         async
         defer
       />
-      <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-purple-50 via-white to-blue-50 p-4">
+          <div className={`min-h-screen flex flex-col items-center justify-center p-4 ${resolvedTheme === 'dark' ? 'bg-linear-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-linear-to-br from-purple-50 via-white to-blue-50'}`}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-md w-full">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-            <p className="text-gray-600">Sign in to access your account</p>
+            <h1 className={`text-3xl font-bold mb-2 ${resolvedTheme === 'dark' ? 'text-slate-100' : 'text-gray-900'}`}>Welcome Back</h1>
+            <p className={resolvedTheme === 'dark' ? 'text-slate-400' : 'text-gray-600'}>Sign in to access your account</p>
           </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-linear-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-6 border border-blue-200"
+            className={`rounded-xl p-6 mb-6 border ${resolvedTheme === 'dark' ? 'bg-linear-to-br from-slate-800 to-slate-700 border-slate-600' : 'bg-linear-to-br from-blue-50 to-purple-50 border-blue-200'}`}
           >
-            <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-blue-600" />
+            <h3 className={`font-semibold mb-3 flex items-center gap-2 ${resolvedTheme === 'dark' ? 'text-slate-100' : 'text-gray-900'}`}>
+              <Zap className={`w-5 h-5 ${resolvedTheme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`} />
               Why sign in:
             </h3>
             <ul className="space-y-2">
@@ -176,9 +179,9 @@ export default function LoginPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex items-start gap-2 text-sm text-gray-700"
+                  className={`flex items-start gap-2 text-sm ${resolvedTheme === 'dark' ? 'text-slate-300' : 'text-gray-700'}`}
                 >
-                  <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                  <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${resolvedTheme === 'dark' ? 'text-green-400' : 'text-green-600'}`} />
                   <span>{benefit}</span>
                 </motion.li>
               ))}
@@ -189,29 +192,33 @@ export default function LoginPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-white rounded-xl shadow-xl p-8"
+            className={`rounded-xl shadow-xl p-8 ${resolvedTheme === 'dark' ? 'bg-slate-800' : 'bg-white'}`}
           >
             <button
               onClick={handleGoogleSignIn}
               disabled={isLoading}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3 border-2 border-gray-300 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-4"
+              className={`w-full flex items-center justify-center gap-3 px-6 py-3 border-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-4 ${
+                resolvedTheme === 'dark'
+                  ? 'border-slate-600 hover:border-slate-500 hover:bg-slate-700 text-slate-200'
+                  : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700'
+              }`}
             >
               <Image src="/Google-Logo.png" alt="Google Logo" width={20} height={20} />
-              <span className="font-medium text-gray-700">Continue with Google</span>
+              <span className="font-medium">Continue with Google</span>
             </button>
 
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className={`w-full border-t ${resolvedTheme === 'dark' ? 'border-slate-600' : 'border-gray-300'}`}></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500">Or sign in with email</span>
+                <span className={`px-4 ${resolvedTheme === 'dark' ? 'bg-slate-800 text-slate-400' : 'bg-white text-gray-500'}`}>Or sign in with email</span>
               </div>
             </div>
 
             <form onSubmit={handleEmailSignIn} className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <label htmlFor="email" className={`block text-sm font-medium mb-1 ${resolvedTheme === 'dark' ? 'text-slate-200' : 'text-gray-700'}`}>Email</label>
                 <Input
                   id="email"
                   type="email"
@@ -219,13 +226,13 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isLoading}
-                  className="w-full"
+                  className={`w-full ${resolvedTheme === 'dark' ? 'bg-slate-700 border-slate-600 text-slate-200 placeholder-slate-400' : ''}`}
                   placeholder="you@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <label htmlFor="password" className={`block text-sm font-medium mb-1 ${resolvedTheme === 'dark' ? 'text-slate-200' : 'text-gray-700'}`}>Password</label>
                 <Input
                   id="password"
                   type="password"
@@ -233,15 +240,15 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   disabled={isLoading}
-                  className="w-full"
+                  className={`w-full ${resolvedTheme === 'dark' ? 'bg-slate-700 border-slate-600 text-slate-200 placeholder-slate-400' : ''}`}
                   placeholder="Your password"
                 />
               </div>
 
               <div>
                 {process.env.NODE_ENV === 'development' ? (
-                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p className="text-sm text-blue-600">🔧 Development Mode - Captcha Disabled</p>
+                  <div className={`p-3 border rounded-lg ${resolvedTheme === 'dark' ? 'bg-blue-900/30 border-blue-700' : 'bg-blue-50 border-blue-200'}`}>
+                    <p className={`text-sm ${resolvedTheme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>🔧 Development Mode - Captcha Disabled</p>
                   </div>
                 ) : process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? (
                   <>
@@ -254,20 +261,20 @@ export default function LoginPage() {
                     </div>
                   </>
                 ) : (
-                  <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                    <p className="text-sm text-yellow-600">Turnstile site key not configured</p>
+                  <div className={`p-3 border rounded-lg ${resolvedTheme === 'dark' ? 'bg-yellow-900/30 border-yellow-700' : 'bg-yellow-50 border-yellow-200'}`}>
+                    <p className={`text-sm ${resolvedTheme === 'dark' ? 'text-yellow-400' : 'text-yellow-600'}`}>Turnstile site key not configured</p>
                   </div>
                 )}
               </div>
 
               {error && (
-                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-3 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-sm text-red-600">{error}</p>
+                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className={`p-3 border rounded-lg ${resolvedTheme === 'dark' ? 'bg-red-900/30 border-red-700' : 'bg-red-50 border-red-200'}`}>
+                  <p className={`text-sm ${resolvedTheme === 'dark' ? 'text-red-400' : 'text-red-600'}`}>{error}</p>
                 </motion.div>
               )}
 
               <div className="flex items-center justify-between">
-                <button type="button" onClick={() => router.push('/reset-password')} className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                <button type="button" onClick={() => router.push('/reset-password')} className={`text-sm font-medium ${resolvedTheme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}>
                   Forgot password?
                 </button>
               </div>
@@ -282,10 +289,10 @@ export default function LoginPage() {
               </button>
             </form>
 
-            <div className="text-center mt-6 pt-6 border-t border-gray-200">
-              <p className="text-sm text-gray-600">
+            <div className={`text-center mt-6 pt-6 border-t ${resolvedTheme === 'dark' ? 'border-slate-600' : 'border-gray-200'}`}>
+              <p className={`text-sm ${resolvedTheme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
                 Don't have an account?{' '}
-                <button onClick={() => router.push('/register')} className="text-blue-600 hover:text-blue-700 font-medium">
+                <button onClick={() => router.push('/register')} className={`font-medium ${resolvedTheme === 'dark' ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}>
                   Sign up
                 </button>
               </p>
