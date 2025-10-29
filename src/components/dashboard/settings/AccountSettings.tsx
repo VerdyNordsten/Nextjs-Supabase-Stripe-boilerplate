@@ -90,7 +90,6 @@ export function AccountSettings({
     setHasUnsavedChanges(hasChanges)
   }, [fullName, avatarUrl, avatarKey, userProfile])
 
-  // Auto-save when avatar changes
   useEffect(() => {
     if (avatarUrl !== userProfile?.avatar_url || avatarKey !== userProfile?.profile_image_key) {
       if (avatarUrl && avatarKey) {
@@ -198,14 +197,11 @@ export function AccountSettings({
         <div className="pt-6 border-t border-gray-200 flex items-center gap-3">
           <Button
             onClick={async () => {
-              // First upload avatar if there's a new one
               if (avatarUploadRef.current?.hasNewAvatar) {
                 console.log('[AccountSettings] Uploading new avatar...')
                 const newAvatarUrl = await avatarUploadRef.current.saveAvatar()
                 console.log('[AccountSettings] Avatar uploaded, URL:', newAvatarUrl)
-                // Don't save here, let the useEffect handle it
               } else {
-                // No new avatar, just save profile
                 console.log('[AccountSettings] Saving profile without avatar change...')
                 await handleSaveProfile()
               }

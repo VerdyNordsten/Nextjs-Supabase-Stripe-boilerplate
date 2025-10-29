@@ -15,12 +15,12 @@ interface PricingSectionProps {
 
 export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSectionProps) {
   return (
-    <section id="pricing" className="py-20 bg-gradient-to-b from-white to-blue-50">
+    <section id="pricing" className="py-20 bg-gradient-to-b from-background to-muted/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="text-sm font-semibold text-blue-600 mb-2">PRICING</p>
-          <h2 className="text-4xl font-bold text-slate-900 mb-4">Simple, Affordable Pricing</h2>
-          <p className="text-xl text-slate-600">One plan with everything you need. No hidden fees.</p>
+          <p className="text-sm font-semibold text-primary mb-2">PRICING</p>
+          <h2 className="text-4xl font-bold text-foreground mb-4">Simple, Affordable Pricing</h2>
+          <p className="text-xl text-muted-foreground">One plan with everything you need. No hidden fees.</p>
         </div>
 
         <div className="max-w-lg mx-auto mb-20">
@@ -28,10 +28,10 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl p-8 shadow-2xl text-white"
+            className="relative bg-linear-to-br from-blue-600 to-blue-400 rounded-2xl p-8 shadow-2xl text-white"
           >
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <span className="bg-yellow-400 text-slate-900 px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+              <span className="bg-accent text-accent-foreground px-6 py-2 rounded-full text-sm font-bold shadow-lg">
                 {pricingPlan.highlight}
               </span>
             </div>
@@ -57,7 +57,7 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
             <motion.button
               onClick={onStartTrial}
               disabled={isCreatingTrial}
-              className="w-full py-4 bg-white text-blue-600 rounded-xl font-bold text-lg hover:bg-slate-50 transition-all shadow-lg disabled:opacity-50"
+              className="w-full py-4 bg-background text-primary rounded-xl font-bold text-lg hover:bg-muted transition-all shadow-lg disabled:opacity-50"
               whileHover={{ scale: isCreatingTrial ? 1 : 1.02 }}
               whileTap={{ scale: isCreatingTrial ? 1 : 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -70,28 +70,28 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
 
         <div className="mt-20">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-slate-900 mb-4">
+            <h3 className="text-3xl font-bold text-foreground mb-4">
               Why Pay More for Less?
             </h3>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-muted-foreground">
               Compare SaaS Templates with other social media management tools
             </p>
           </div>
 
           <div className="hidden lg:block overflow-x-auto">
-            <table className="w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+            <table className="w-full bg-background rounded-2xl shadow-xl overflow-hidden">
               <thead>
-                <tr className="bg-slate-50">
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900 w-48">Feature</th>
+                <tr className="bg-muted">
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-foreground w-48">Feature</th>
                   {competitorComparison.map((competitor, idx) => (
-                    <th key={idx} className={`px-6 py-4 text-center ${idx === 0 ? 'bg-blue-50' : ''}`}>
+                    <th key={idx} className={`px-6 py-4 text-center ${idx === 0 ? 'bg-primary/10' : ''}`}>
                       <div className="flex flex-col items-center">
                         <span className="text-3xl mb-2">{competitor.logo}</span>
-                        <span className="text-sm font-bold text-slate-900">{competitor.name}</span>
-                        <span className={`text-2xl font-bold mt-2 ${idx === 0 ? 'text-blue-600' : 'text-slate-600'}`}>
+                        <span className="text-sm font-bold text-foreground">{competitor.name}</span>
+                        <span className={`text-2xl font-bold mt-2 ${idx === 0 ? 'text-primary' : 'text-muted-foreground'}`}>
                           {competitor.price}
                         </span>
-                        <span className="text-xs text-slate-500">/month</span>
+                        <span className="text-xs text-muted-foreground">/month</span>
                       </div>
                     </th>
                   ))}
@@ -99,20 +99,20 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
               </thead>
               <tbody>
                 {comparisonFeatures.map((feature, idx) => (
-                  <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
-                    <td className="px-6 py-4 text-sm font-medium text-slate-900">{feature.label}</td>
+                  <tr key={idx} className={idx % 2 === 0 ? 'bg-background' : 'bg-muted'}>
+                    <td className="px-6 py-4 text-sm font-medium text-foreground">{feature.label}</td>
                     {competitorComparison.map((competitor, cidx) => {
                       const value = competitor.features[feature.key as keyof typeof competitor.features];
                       return (
-                        <td key={cidx} className={`px-6 py-4 text-center ${cidx === 0 ? 'bg-blue-50/50' : ''}`}>
+                        <td key={cidx} className={`px-6 py-4 text-center ${cidx === 0 ? 'bg-primary/5' : ''}`}>
                           {typeof value === 'boolean' ? (
                             value ? (
                               <FaCheck className={`inline-block ${cidx === 0 ? 'text-green-500 text-xl' : 'text-green-500'}`} />
                             ) : (
-                              <FaTimes className="inline-block text-red-400" />
+                              <FaTimes className="inline-block text-destructive" />
                             )
                           ) : (
-                            <span className={`text-sm ${cidx === 0 ? 'font-bold text-blue-600' : 'text-slate-600'}`}>
+                            <span className={`text-sm ${cidx === 0 ? 'font-bold text-primary' : 'text-muted-foreground'}`}>
                               {value}
                             </span>
                           )}
@@ -121,15 +121,15 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
                     })}
                   </tr>
                 ))}
-                <tr className="bg-white border-t-2 border-slate-200">
+                <tr className="bg-background border-t-2 border-border">
                   <td className="px-6 py-4"></td>
                   {competitorComparison.map((competitor, cidx) => (
-                    <td key={cidx} className={`px-6 py-4 ${cidx === 0 ? 'bg-blue-50/50' : ''}`}>
+                    <td key={cidx} className={`px-6 py-4 ${cidx === 0 ? 'bg-primary/5' : ''}`}>
                       {cidx === 0 ? (
                         <motion.button
                           onClick={onStartTrial}
                           disabled={isCreatingTrial}
-                          className="w-full py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 relative overflow-hidden"
+                          className="w-full py-2 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition disabled:opacity-50 relative overflow-hidden"
                           whileHover={{ scale: isCreatingTrial ? 1 : 1.02 }}
                           whileTap={{ scale: isCreatingTrial ? 1 : 0.98 }}
                           transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -138,7 +138,7 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
                         </motion.button>
                       ) : (
                         <div className="text-center">
-                          <span className="text-xs text-slate-500">Starting from</span>
+                          <span className="text-xs text-muted-foreground">Starting from</span>
                         </div>
                       )}
                     </td>
@@ -156,22 +156,22 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className={`bg-white rounded-xl p-6 shadow-lg border-2 ${
-                  idx === 0 ? 'border-blue-600' : 'border-slate-200'
+                className={`bg-background rounded-xl p-6 shadow-lg border-2 ${
+                  idx === 0 ? 'border-primary' : 'border-border'
                 }`}
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{competitor.logo}</span>
                     <div>
-                      <h4 className="font-bold text-slate-900">{competitor.name}</h4>
-                      <p className={`text-2xl font-bold ${idx === 0 ? 'text-blue-600' : 'text-slate-600'}`}>
-                        {competitor.price}<span className="text-sm text-slate-500">/mo</span>
+                      <h4 className="font-bold text-foreground">{competitor.name}</h4>
+                      <p className={`text-2xl font-bold ${idx === 0 ? 'text-primary' : 'text-muted-foreground'}`}>
+                        {competitor.price}<span className="text-sm text-muted-foreground">/mo</span>
                       </p>
                     </div>
                   </div>
                   {idx === 0 && (
-                    <span className="bg-yellow-400 text-slate-900 px-3 py-1 rounded-full text-xs font-bold">
+                    <span className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs font-bold">
                       Best Value
                     </span>
                   )}
@@ -181,14 +181,14 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
                   {comparisonFeatures.map((feature, fidx) => {
                     const value = competitor.features[feature.key as keyof typeof competitor.features];
                     return (
-                      <div key={fidx} className="flex justify-between items-center py-2 border-b border-slate-100">
-                        <span className="text-sm text-slate-600">{feature.label}</span>
-                        <span className="font-medium text-slate-900">
+                      <div key={fidx} className="flex justify-between items-center py-2 border-b border-border">
+                        <span className="text-sm text-muted-foreground">{feature.label}</span>
+                        <span className="font-medium text-foreground">
                           {typeof value === 'boolean' ? (
                             value ? (
                               <FaCheck className="text-green-500" />
                             ) : (
-                              <FaTimes className="text-red-400" />
+                              <FaTimes className="text-destructive" />
                             )
                           ) : (
                             value
@@ -203,7 +203,7 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
                   <motion.button
                     onClick={onStartTrial}
                     disabled={isCreatingTrial}
-                    className="w-full mt-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 relative overflow-hidden"
+                    className="w-full mt-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition disabled:opacity-50 relative overflow-hidden"
                     whileHover={{ scale: isCreatingTrial ? 1 : 1.02 }}
                     whileTap={{ scale: isCreatingTrial ? 1 : 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -216,9 +216,9 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
           </div>
 
           <div className="mt-12 text-center">
-            <div className="inline-flex items-center gap-2 bg-green-50 border border-green-200 rounded-full px-6 py-3">
+            <div className="inline-flex items-center gap-2 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-full px-6 py-3">
               <FaCheckCircle className="text-green-500 text-xl" />
-              <span className="font-semibold text-green-700">
+              <span className="font-semibold text-green-700 dark:text-green-300">
                 Save up to $230/month compared to other tools!
               </span>
             </div>

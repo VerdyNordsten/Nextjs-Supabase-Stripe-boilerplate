@@ -10,7 +10,7 @@ interface CTASectionProps {
 
 export function CTASection({ onStartTrial, isCreatingTrial }: CTASectionProps) {
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-400">
+    <section className="py-20 bg-linear-to-br from-blue-600 to-blue-400">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl font-bold text-white mb-6">
           Ready to Transform Your Social Media?
@@ -21,7 +21,7 @@ export function CTASection({ onStartTrial, isCreatingTrial }: CTASectionProps) {
         <motion.button
           onClick={onStartTrial}
           disabled={isCreatingTrial}
-          className="px-8 py-4 bg-white text-blue-600 text-lg rounded-lg hover:bg-slate-50 shadow-xl hover:shadow-2xl transition-all disabled:opacity-50 font-semibold relative overflow-hidden"
+          className="px-8 py-4 bg-background text-primary text-lg rounded-lg hover:bg-muted shadow-xl hover:shadow-2xl transition-all disabled:opacity-50 font-semibold relative overflow-hidden"
           whileHover={{ scale: isCreatingTrial ? 1 : 1.05 }}
           whileTap={{ scale: isCreatingTrial ? 1 : 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}

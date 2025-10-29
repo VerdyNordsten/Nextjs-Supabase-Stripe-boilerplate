@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    // Skip Turnstile verification in development
     if (process.env.NODE_ENV === 'development') {
       console.log('[Turnstile] Development mode - skipping verification');
       return NextResponse.json({ 
@@ -30,7 +29,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify token with Cloudflare
     const verificationResponse = await fetch(
       'https://challenges.cloudflare.com/turnstile/v0/siteverify',
       {
@@ -39,8 +37,7 @@ export async function POST(request: NextRequest) {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(token)}`,
-        // Add timeout to prevent hanging
-        signal: AbortSignal.timeout(10000), // 10 second timeout
+        signal: AbortSignal.timeout(10000),
       }
     );
 

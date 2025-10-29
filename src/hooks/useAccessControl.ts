@@ -25,7 +25,6 @@ export function useAccessControl() {
   });
 
   const checkAccess = useCallback(async () => {
-    // Don't check access if user is not available or still loading
     if (!user) {
       setAccessStatus({
         hasAccess: false,
@@ -51,7 +50,6 @@ export function useAccessControl() {
     }
 
     try {
-      // Use the get_user_data RPC function to get all user data in one call
       const { data, error } = await supabase.rpc('get_user_data');
 
       if (error) {

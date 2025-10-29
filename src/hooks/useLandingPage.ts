@@ -37,19 +37,15 @@ export function useLandingPage() {
       const { data: { session } } = await supabase.auth.getSession();
 
       if (!session) {
-        // Not logged in → go to register (will redirect to Stripe checkout after signup)
         router.push('/register');
         return;
       }
 
-      // Already logged in → check trial/subscription status
       if (subscription || isInTrial) {
-        // Already has subscription or trial → go to dashboard
         router.push('/dashboard');
         return;
       }
 
-      // Logged in but no trial/subscription → redirect to Stripe checkout
       const checkoutResponse = await fetch('/api/stripe/create-checkout', {
         method: 'POST',
         headers: {
@@ -65,10 +61,8 @@ export function useLandingPage() {
       const checkoutData = await checkoutResponse.json();
       
       if (checkoutResponse.ok && checkoutData.url) {
-        // Redirect to Stripe checkout
         window.location.href = checkoutData.url;
       } else {
-        // Failed to create checkout → go to dashboard
         console.error('Checkout creation failed:', checkoutData);
         router.push('/dashboard');
       }

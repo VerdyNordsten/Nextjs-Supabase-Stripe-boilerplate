@@ -76,3 +76,4 @@ logs
 # MCP
 .cursor/mcp.json
 .kilocodemodes
+.claude

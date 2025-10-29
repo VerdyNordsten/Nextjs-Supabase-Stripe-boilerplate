@@ -168,14 +168,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               setSubscription(null);
               setPlanStatus('free');
               
-              // Handle expired sessions - if user was logged in but session expired
               if (_event === 'TOKEN_REFRESHED' && isLoggingOut) {
-                // Session expired while logging out, just continue with logout
                 console.log('[AuthContext] Session expired during logout');
               }
               
-              // If session expired but user is on a protected route, don't redirect yet
-              // Let the ProtectedRoute component handle it
               if (_event === 'SIGNED_OUT' || _event === 'TOKEN_REFRESHED') {
                 console.log('[AuthContext] User signed out or session expired');
               }
@@ -329,17 +325,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         sessionStorage.setItem('logging-out', 'true');
       }
       
-      // Update state immediately
       setSession(null);
       setUser(null);
       setUserProfile(null);
       setIsSubscriber(false);
       
       try {
-        // Try to sign out, but don't wait if session is already expired
         const signOutPromise = supabase.auth.signOut({ scope: 'global' });
         
-        // Race the signOut with a timeout to prevent hanging
         await Promise.race([
           signOutPromise,
           new Promise((_, reject) => 
@@ -404,7 +397,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.error('Storage clear error:', err);
       }
       
-      // Always redirect immediately, don't wait
       if (typeof window !== 'undefined') {
         window.location.replace('/login');
       }

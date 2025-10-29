@@ -8,7 +8,7 @@ const BrandTemplateCard: React.FC<BrandTemplateCardProps> = ({ template, isSelec
     onClick={onClick}
     className={`relative p-4 rounded-xl border-2 transition-all ${
       isSelected
-        ? 'border-transparent bg-gradient-to-r ' + template.color + ' text-white shadow-lg'
+        ? 'border-transparent bg-linear-to-r ' + template.color + ' text-white shadow-lg'
         : 'bg-white border-gray-200 hover:border-gray-300 text-gray-700'
     }`}
   >

@@ -12,13 +12,12 @@ export default function DashboardLayout({
   const pathname = usePathname()
   const isOnboarding = pathname === '/dashboard/onboarding'
 
-  // Onboarding page has its own layout (no sidebar)
   if (isOnboarding) {
     return <>{children}</>
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Sidebar />
       <div className="lg:ml-60 transition-all duration-300">
         <div className="lg:hidden h-16" />

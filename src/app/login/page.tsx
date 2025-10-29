@@ -90,11 +90,9 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // Skip Turnstile verification in development
       const isDevelopment = process.env.NODE_ENV === 'development';
       
       if (!isDevelopment) {
-        // Get the Turnstile token from form data
         const formData = new FormData(e.currentTarget as HTMLFormElement);
         const turnstileToken = formData.get('cf-turnstile-response') as string;
         
@@ -136,7 +134,7 @@ export default function LoginPage() {
 
   if (isLoading || authLoading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-purple-50 via-white to-blue-50">
         <div className="relative mb-6">
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-blue-600"></div>
           <div className="absolute inset-0 rounded-full h-16 w-16 border-4 border-transparent border-r-purple-600 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1s' }}></div>
@@ -154,7 +152,7 @@ export default function LoginPage() {
         async
         defer
       />
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-purple-50 via-white to-blue-50 p-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-md w-full">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
@@ -165,7 +163,7 @@ export default function LoginPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-6 border border-blue-200"
+            className="bg-linear-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-6 border border-blue-200"
           >
             <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
               <Zap className="w-5 h-5 text-blue-600" />
@@ -180,7 +178,7 @@ export default function LoginPage() {
                   transition={{ delay: 0.3 + i * 0.1 }}
                   className="flex items-start gap-2 text-sm text-gray-700"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                   <span>{benefit}</span>
                 </motion.li>
               ))}
@@ -277,7 +275,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? 'Signing In...' : 'Sign In'}
                 <ArrowRight className="w-5 h-5" />

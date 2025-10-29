@@ -63,7 +63,6 @@ export async function GET(request: Request) {
 
       console.log('AuthCallback: Session established for user:', data.session.user.email);
 
-      // Sync user data to public tables
       try {
         const user = data.session.user;
         await supabase.rpc('sync_user_on_signup', {
@@ -78,10 +77,8 @@ export async function GET(request: Request) {
         console.log('AuthCallback: User data synced successfully');
       } catch (syncError) {
         console.error('AuthCallback: Failed to sync user data:', syncError);
-        // Don't block the flow if sync fails
       }
 
-      // Check onboarding status
       let redirectUrl = next || '/dashboard';
       
       if (isSignup && redirectToSubscription) {
@@ -97,7 +94,6 @@ export async function GET(request: Request) {
         console.log('AuthCallback: Payment flag detected, redirecting to checkout');
       }
       else {
-        // Check if returning user has completed onboarding
         try {
           const { data: prefs } = await supabase
             .from('user_preferences')

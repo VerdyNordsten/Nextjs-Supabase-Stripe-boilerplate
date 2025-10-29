@@ -20,14 +20,12 @@ export const useOnboardingState = (user: User | null) => {
   const [hasCheckedOnboarding, setHasCheckedOnboarding] = useState(false)
   const [isPageReady, setIsPageReady] = useState(false)
 
-  // Save step to localStorage
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('onboarding_step', currentStep.toString())
     }
   }, [currentStep])
 
-  // Check if onboarding is already completed
   const checkOnboarding = useCallback(async () => {
     if (!user?.id || hasCheckedOnboarding) return
     
@@ -47,7 +45,6 @@ export const useOnboardingState = (user: User | null) => {
     }
   }, [user?.id, hasCheckedOnboarding, router])
 
-  // Complete onboarding
   const completeOnboarding = useCallback(async () => {
     if (!user?.id) return
     
@@ -87,7 +84,6 @@ export const useOnboardingState = (user: User | null) => {
     }
   }, [user?.id])
 
-  // Initialize page
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsPageReady(true)

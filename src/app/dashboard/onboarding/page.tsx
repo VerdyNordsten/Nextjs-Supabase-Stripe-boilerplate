@@ -7,12 +7,10 @@ import { Sparkles, Users, Rocket, Target } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabaseBrowser as supabase } from '@/utils/supabase-browser'
 
-// Import from new structure
 import { Step } from './types'
 import { useConfetti, useOnboardingState } from './hooks'
 import { ProgressStep, StepContent, AnimatedBackground } from './components'
 
-// Memoize steps to prevent unnecessary re-renders
 const getSteps = (currentStep: number): Step[] => [
   {
     id: 1,
@@ -48,7 +46,6 @@ const getSteps = (currentStep: number): Step[] => [
   },
 ]
 
-// Main component
 export default function OnboardingPage() {
   const { user, userProfile } = useAuth()
   const router = useRouter()
@@ -67,28 +64,23 @@ export default function OnboardingPage() {
     completeOnboarding
   } = useOnboardingState(user)
 
-  // Memoize steps to prevent unnecessary re-renders
   const steps = useMemo(() => getSteps(currentStep), [currentStep])
 
-  // Memoize user display name
   const userDisplayName = useMemo(() => {
     return userProfile?.full_name || user?.email?.split('@')[0] || 'there'
   }, [userProfile?.full_name, user?.email])
 
-  // Set default brand name from user profile
   useEffect(() => {
     if (userProfile?.full_name && !brandName) {
       setBrandName(userProfile.full_name)
     }
   }, [userProfile?.full_name, brandName, setBrandName])
 
-  // Event handlers
   const handleCreateBrand = async () => {
     if (!brandName.trim()) return
 
     setIsLoading(true)
     try {
-      // Check if user_preferences record exists first
       const { data: existing } = await supabase
         .from('user_preferences')
         .select('id')
@@ -96,7 +88,6 @@ export default function OnboardingPage() {
         .maybeSingle()
 
       if (existing) {
-        // Update existing record
         const { error: updateError } = await supabase
           .from('user_preferences')
           .update({
@@ -107,7 +98,6 @@ export default function OnboardingPage() {
 
         if (updateError) throw updateError
       } else {
-        // Insert new record
         const { error: insertError } = await supabase
           .from('user_preferences')
           .insert({
@@ -193,25 +183,24 @@ export default function OnboardingPage() {
 
   if (!isPageReady) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
         <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
       <AnimatedBackground />
 
       <div className="relative z-10">
-        {/* Welcome Message */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center pt-8 pb-6"
         >
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+          <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
             Welcome to SaaS Templates! 🎉
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -219,7 +208,6 @@ export default function OnboardingPage() {
           </p>
         </motion.div>
         
-        {/* Progress Steps */}
         <div className="px-6 pb-8">
           <div className="flex items-center justify-center space-x-8 md:space-x-16">
             {steps.map((step) => (
@@ -234,7 +222,6 @@ export default function OnboardingPage() {
           </div>
         </div>
         
-        {/* Main Content */}
         <div className="flex-1 flex items-center justify-center p-6 py-12">
           <div className="w-full max-w-2xl">
             <StepContent

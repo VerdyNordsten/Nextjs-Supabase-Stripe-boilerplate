@@ -12,7 +12,7 @@ export default function CheckoutPage() {
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const canceled = searchParams.get('canceled');
-  const forcePayment = searchParams.get('force') === 'true'; // Allow forcing payment page
+  const forcePayment = searchParams.get('force') === 'true';
   
   const { isInTrial, isLoading: trialLoading } = useTrialStatus();
   const { subscription, isLoading: subscriptionLoading } = useSubscription();
@@ -29,13 +29,11 @@ export default function CheckoutPage() {
       return;
     }
 
-    // Wait for trial and subscription status to load
     if (trialLoading || subscriptionLoading) {
       console.log('[Checkout] Loading trial/subscription status...');
       return;
     }
 
-    // Check if user already has trial or active subscription (and not forcing payment)
     if (!forcePayment && (isInTrial || subscription)) {
       console.log('[Checkout] User already has trial or subscription, redirecting to dashboard...');
       console.log('[Checkout] Trial:', isInTrial, 'Subscription:', subscription?.status);
@@ -85,7 +83,7 @@ export default function CheckoutPage() {
 
   if (canceled) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-purple-50 via-white to-blue-50 p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
           <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +97,7 @@ export default function CheckoutPage() {
           <div className="space-y-3">
             <button
               onClick={() => router.push('/checkout')}
-              className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium"
+              className="w-full px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium"
             >
               Try Again
             </button>
@@ -117,7 +115,7 @@ export default function CheckoutPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-purple-50 via-white to-blue-50 p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,7 +135,7 @@ export default function CheckoutPage() {
                 setError(null);
                 window.location.reload();
               }}
-              className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium"
+              className="w-full px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium"
             >
               Try Again
             </button>
@@ -154,7 +152,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-purple-50 via-white to-blue-50">
       <div className="text-center space-y-6">
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-4 border-gray-200 border-t-blue-600 mx-auto"></div>
@@ -175,7 +173,7 @@ export default function CheckoutPage() {
 
         <div className="max-w-md mx-auto bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200">
           <div className="flex items-start gap-3 text-left">
-            <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <div className="text-sm text-gray-600">

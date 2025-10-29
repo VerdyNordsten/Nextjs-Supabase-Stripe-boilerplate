@@ -12,7 +12,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ onStartTrial, isCreatingTrial, onOpenVideoModal }: HeroSectionProps) {
   return (
-    <section className="pt-20 pb-16 bg-gradient-to-b from-blue-50 to-white">
+    <section className="pt-20 pb-16 bg-gradient-to-b from-blue-50/10 to-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <motion.div
@@ -20,13 +20,13 @@ export function HeroSection({ onStartTrial, isCreatingTrial, onOpenVideoModal }:
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
               Schedule your social<br/>
-              <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                 media posts
               </span> in one place.
             </h1>
-            <p className="mt-6 text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="mt-6 text-xl text-muted-foreground max-w-3xl mx-auto">
               Save time and stay consistent with SaaS Templates. Schedule, manage, and publish content 
               across all your social media platforms with AI-powered tools.
             </p>
@@ -35,22 +35,22 @@ export function HeroSection({ onStartTrial, isCreatingTrial, onOpenVideoModal }:
               <motion.button
                 onClick={onStartTrial}
                 disabled={isCreatingTrial}
-                className="px-8 py-4 bg-blue-600 text-white text-lg rounded-lg hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all disabled:opacity-50 font-medium"
+                className="px-8 py-4 bg-primary text-primary-foreground text-lg rounded-lg hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all disabled:opacity-50 font-medium"
                 whileHover={{ scale: isCreatingTrial ? 1 : 1.05 }}
                 whileTap={{ scale: isCreatingTrial ? 1 : 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 Get Started - 7 Day Free Trial
               </motion.button>
-              <button 
+              <button
                 onClick={onOpenVideoModal}
-                className="px-8 py-4 bg-white text-blue-600 text-lg rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-all font-medium"
+                className="px-8 py-4 bg-background text-primary text-lg rounded-lg border-2 border-primary hover:bg-muted transition-all font-medium"
               >
                 Watch Demo
               </button>
             </div>
 
-            <div className="mt-8 flex items-center justify-center gap-6 text-sm text-slate-600">
+            <div className="mt-8 flex items-center justify-center gap-6 text-sm text-muted-foreground">
               <div className="flex items-center">
                 <FaCheckCircle className="text-green-500 mr-2" />
                 Free 7-day trial

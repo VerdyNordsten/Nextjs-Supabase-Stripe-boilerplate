@@ -179,7 +179,7 @@ export function SubscriptionManager({
               {isInTrial ? (
                 <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-4">
                   <div className="flex items-start gap-3">
-                    <Gift className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <Gift className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-blue-900 font-medium mb-1">
                         You're in your trial period
@@ -205,7 +205,7 @@ export function SubscriptionManager({
               ) : trialEndTime ? (
                 <div className="p-4 bg-red-50 border border-red-200 rounded-lg mb-4">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <AlertTriangle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-red-900 font-medium mb-1">
                         Your trial period has ended
@@ -237,7 +237,7 @@ export function SubscriptionManager({
               
               <button
                 onClick={() => router.push('/checkout?force=true')}
-                className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+                className="w-full px-6 py-4 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
               >
                 Subscribe Now - $19/month
               </button>
@@ -249,7 +249,6 @@ export function SubscriptionManager({
         </CardContent>
       </Card>
 
-      {/* Cancel Modal */}
       {isCancelModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-xl">

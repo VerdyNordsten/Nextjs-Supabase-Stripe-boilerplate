@@ -6,11 +6,11 @@ import { testimonials } from '@/constants/landing-page';
 
 export function TestimonialsSection() {
   return (
-    <section className="py-16 bg-white border-y border-slate-200">
+    <section className="py-16 bg-background border-y border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <p className="text-sm font-semibold text-blue-600 mb-2">LOVED BY CREATORS</p>
-          <h2 className="text-3xl font-bold text-slate-900">
+          <p className="text-sm font-semibold text-primary mb-2">LOVED BY CREATORS</p>
+          <h2 className="text-3xl font-bold text-foreground">
             Here's what creators are saying about SaaS Templates
           </h2>
         </div>
@@ -22,15 +22,15 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white border border-slate-200 rounded-lg p-6 shadow-sm hover:shadow-md transition"
+              className="bg-background border border-border rounded-lg p-6 shadow-sm hover:shadow-md transition"
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold mr-3">
+                <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold mr-3">
                   {testimonial.avatar}
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900">{testimonial.name}</h4>
-                  <p className="text-sm text-slate-600">{testimonial.role}</p>
+                  <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                 </div>
               </div>
               <div className="flex mb-3">
@@ -38,7 +38,7 @@ export function TestimonialsSection() {
                   <FaCheckCircle key={i} className="h-4 w-4 text-yellow-400" />
                 ))}
               </div>
-              <p className="text-slate-700">{testimonial.content}</p>
+              <p className="text-foreground/80">{testimonial.content}</p>
             </motion.div>
           ))}
         </div>

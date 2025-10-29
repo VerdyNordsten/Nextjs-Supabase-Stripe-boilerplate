@@ -52,13 +52,11 @@ export const AvatarUpload = forwardRef<AvatarUploadRef, AvatarUploadProps>(({
     const file = e.target.files?.[0]
     if (!file) return
 
-    // Validate file type
     if (!file.type.startsWith('image/')) {
       onError('Please select an image file')
       return
     }
 
-    // Validate file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
       onError('Image size must be less than 5MB')
       return
@@ -66,7 +64,6 @@ export const AvatarUpload = forwardRef<AvatarUploadRef, AvatarUploadProps>(({
 
     setNewAvatarFile(file)
     
-    // Create preview
     const reader = new FileReader()
     reader.onloadend = () => {
       setAvatarPreview(reader.result as string)
@@ -80,9 +77,7 @@ export const AvatarUpload = forwardRef<AvatarUploadRef, AvatarUploadProps>(({
     onError('')
     
     try {
-      // Delete old avatar from storage if exists
       if (currentAvatar) {
-        // Extract the file path from the URL
         const urlParts = currentAvatar.split('/')
         const fileName = urlParts[urlParts.length - 1]
         if (fileName) {
@@ -111,9 +106,7 @@ export const AvatarUpload = forwardRef<AvatarUploadRef, AvatarUploadProps>(({
     if (!newAvatarFile) return { url: null, key: null }
 
     try {
-      // Delete old avatar if exists
       if (currentAvatar) {
-        // Extract the file path from the URL
         const urlParts = currentAvatar.split('/')
         const fileName = urlParts[urlParts.length - 1]
         if (fileName) {
@@ -123,7 +116,6 @@ export const AvatarUpload = forwardRef<AvatarUploadRef, AvatarUploadProps>(({
         }
       }
 
-      // Upload new avatar
       const fileExt = newAvatarFile.name.split('.').pop()
       const fileName = `avatar_${Date.now()}.${fileExt}`
       const filePath = `${userId}/${fileName}`
@@ -137,14 +129,13 @@ export const AvatarUpload = forwardRef<AvatarUploadRef, AvatarUploadProps>(({
 
       if (uploadError) throw uploadError
 
-      // Get public URL
       const { data } = supabase.storage
         .from('avatars')
         .getPublicUrl(filePath)
 
       return {
         url: data.publicUrl,
-        key: `avatar/${filePath}` // Store with avatar/ prefix in database
+        key: `avatar/${filePath}`
       }
     } catch (err) {
       console.error('Error uploading avatar:', err)
@@ -195,7 +186,7 @@ export const AvatarUpload = forwardRef<AvatarUploadRef, AvatarUploadProps>(({
               sizes="(max-width: 208px) 100vw, 208px"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-pink-600 to-pink-400 flex items-center justify-center">
+            <div className="w-full h-full bg-linear-to-br from-pink-600 to-pink-400 flex items-center justify-center">
               <span className="text-white text-6xl font-semibold">
                 {getInitials(fullName || undefined, email || undefined)}
               </span>

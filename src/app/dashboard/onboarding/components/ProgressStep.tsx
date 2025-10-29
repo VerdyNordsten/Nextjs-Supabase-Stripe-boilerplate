@@ -36,7 +36,7 @@ const ProgressStep: React.FC<ProgressStepProps> = ({ step, isCurrent, isComplete
     >
       {isCurrent && (
         <motion.div
-          className="absolute inset-0 w-24 h-24 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-30 blur-xl"
+          className="absolute inset-0 w-24 h-24 rounded-full bg-linear-to-r from-blue-400 to-purple-400 opacity-30 blur-xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -52,9 +52,9 @@ const ProgressStep: React.FC<ProgressStepProps> = ({ step, isCurrent, isComplete
       <motion.div
         className={`relative w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg transform-gpu preserve-3d ${
           isCompleted
-            ? 'bg-gradient-to-br ' + step.color
+            ? 'bg-linear-to-br ' + step.color
             : isCurrent
-            ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-2xl'
+            ? 'bg-linear-to-br from-blue-500 to-purple-600 shadow-2xl'
             : 'bg-gray-200'
         }`}
         style={{
@@ -80,7 +80,7 @@ const ProgressStep: React.FC<ProgressStepProps> = ({ step, isCurrent, isComplete
         
         {isCurrent && (
           <motion.div
-            className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            className="absolute inset-0 rounded-2xl bg-linear-to-r from-transparent via-white/20 to-transparent"
             animate={{
               x: ['-100%', '100%'],
             }}

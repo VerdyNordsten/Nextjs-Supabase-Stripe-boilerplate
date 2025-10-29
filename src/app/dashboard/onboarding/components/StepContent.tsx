@@ -39,7 +39,7 @@ const StepContent: React.FC<StepContentProps> = ({
             className="space-y-8"
           >
             <motion.div variants={ANIMATION_VARIANTS.item} className="text-center space-y-4">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg">
+              <div className="w-20 h-20 bg-linear-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg">
                 <Sparkles className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-gray-900">
@@ -92,7 +92,7 @@ const StepContent: React.FC<StepContentProps> = ({
               <Button
                 onClick={onCreateBrand}
                 disabled={!brandName.trim() || isLoading}
-                className="w-full h-14 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white text-lg font-semibold rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="w-full h-14 bg-linear-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white text-lg font-semibold rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-3">
@@ -131,7 +131,7 @@ const StepContent: React.FC<StepContentProps> = ({
             className="space-y-8"
           >
             <motion.div variants={ANIMATION_VARIANTS.item} className="text-center space-y-4">
-              <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg">
+              <div className="w-20 h-20 bg-linear-to-br from-green-500 to-teal-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg">
                 <Users className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-gray-900">
@@ -145,7 +145,7 @@ const StepContent: React.FC<StepContentProps> = ({
             <motion.div variants={ANIMATION_VARIANTS.item} className="space-y-4">
               <Button
                 onClick={onConnectAccounts}
-                className="w-full h-14 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white text-lg font-semibold rounded-xl shadow-lg transition-all"
+                className="w-full h-14 bg-linear-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white text-lg font-semibold rounded-xl shadow-lg transition-all"
               >
                 <Users className="w-5 h-5 mr-3" />
                 Connect Your Accounts
@@ -183,7 +183,7 @@ const StepContent: React.FC<StepContentProps> = ({
             className="space-y-8"
           >
             <motion.div variants={ANIMATION_VARIANTS.item} className="text-center space-y-4">
-              <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg">
+              <div className="w-20 h-20 bg-linear-to-br from-orange-500 to-red-600 rounded-3xl flex items-center justify-center mx-auto shadow-lg">
                 <PenTool className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-gray-900">
@@ -197,7 +197,7 @@ const StepContent: React.FC<StepContentProps> = ({
             <motion.div variants={ANIMATION_VARIANTS.item} className="space-y-4">
               <Button
                 onClick={onCreatePost}
-                className="w-full h-14 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white text-lg font-semibold rounded-xl shadow-lg transition-all"
+                className="w-full h-14 bg-linear-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white text-lg font-semibold rounded-xl shadow-lg transition-all"
               >
                 <PenTool className="w-5 h-5 mr-3" />
                 Create Your First Post

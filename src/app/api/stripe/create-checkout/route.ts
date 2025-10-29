@@ -39,19 +39,17 @@ export async function POST(request: NextRequest) {
     console.log('[Stripe API] App URL:', process.env.NEXT_PUBLIC_APP_URL);
     console.log('[Stripe API] Is Trial Checkout:', isTrialCheckout);
 
-    // Prepare subscription_data with optional trial period
     const subscriptionData: Stripe.Checkout.SessionCreateParams['subscription_data'] = {
       metadata: {
         user_id: userId,
       },
     };
 
-    // Add trial period for new user signups
     if (isTrialCheckout) {
       subscriptionData.trial_period_days = 7;
       subscriptionData.trial_settings = {
         end_behavior: {
-          missing_payment_method: 'cancel', // Cancel subscription if no payment method after trial
+          missing_payment_method: 'cancel',
         },
       };
     }
@@ -77,7 +75,7 @@ export async function POST(request: NextRequest) {
       cancel_url: isTrialCheckout
         ? `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?trial=canceled`
         : `${process.env.NEXT_PUBLIC_APP_URL}/checkout?canceled=true`,
-      payment_method_collection: 'always', // Always require payment method
+      payment_method_collection: 'always',
       subscription_data: subscriptionData,
     });
 

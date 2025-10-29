@@ -228,7 +228,6 @@ export default function Dashboard() {
       console.log('Dashboard: Starting onboarding check')
       setIsCheckingOnboarding(true)
       
-      // Add minimum delay for smooth UX (500ms)
       const [userData] = await Promise.all([
         supabase.auth.getUser(),
         new Promise(resolve => setTimeout(resolve, 500))
@@ -261,11 +260,9 @@ export default function Dashboard() {
       
       setHasCheckedOnboarding(true)
       
-      // If no preferences record exists or onboarding not completed
       if (!data || data.has_completed_onboarding !== true) {
         setIsRedirecting(true)
         
-        // Add smooth transition delay
         await new Promise(resolve => setTimeout(resolve, 300))
         
         router.push('/dashboard/onboarding')
@@ -278,7 +275,6 @@ export default function Dashboard() {
     }
   }, [hasCheckedOnboarding, pathname, router])
 
-  // Check onboarding status ONCE on mount
   useEffect(() => {
     console.log('Dashboard: useEffect triggered', {
       hasCheckedOnboarding,
@@ -295,20 +291,17 @@ export default function Dashboard() {
     if (trial === 'canceled') {
       setNotificationType('canceled')
       setShowNotification(true)
-      // Auto dismiss after 8 seconds
       setTimeout(() => setShowNotification(false), 8000)
     } else if (trial === 'started') {
       setNotificationType('started')
       setShowNotification(true)
-      // Auto dismiss after 8 seconds
       setTimeout(() => setShowNotification(false), 8000)
     }
   }, [searchParams])
 
-  // Show loading screen while checking onboarding
   if (isCheckingOnboarding || isRedirecting) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-purple-50 via-white to-blue-50">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -345,12 +338,11 @@ export default function Dashboard() {
             {isRedirecting ? 'Setting up your experience' : 'Just a moment'}
           </motion.p>
           
-          {/* Loading progress animation */}
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="h-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mt-4 max-w-xs mx-auto"
+            className="h-1 bg-linear-to-r from-purple-600 to-blue-600 rounded-full mt-4 max-w-xs mx-auto"
           />
         </motion.div>
       </div>
@@ -374,7 +366,7 @@ export default function Dashboard() {
           >
             {notificationType === 'canceled' ? (
               <div className="bg-white border-l-4 border-yellow-500 rounded-lg shadow-xl p-4 flex items-start gap-3">
-                <AlertCircle className="h-5 w-5 text-yellow-500 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="h-5 w-5 text-yellow-500 shrink-0 mt-0.5" />
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-900">Trial Setup Canceled</h3>
                   <p className="text-sm text-gray-600 mt-1">
@@ -398,7 +390,7 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className="bg-white border-l-4 border-green-500 rounded-lg shadow-xl p-4 flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-900">🎉 Trial Started!</h3>
                   <p className="text-sm text-gray-600 mt-1">
@@ -428,7 +420,7 @@ export default function Dashboard() {
         className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent flex items-center gap-2">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-linear-to-r from-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent flex items-center gap-2">
             <Sparkles className="h-8 w-8 text-purple-600" />
             Analytics Dashboard
           </h1>
@@ -449,7 +441,7 @@ export default function Dashboard() {
           <Button 
             size="sm" 
             onClick={() => router.push('/dashboard/create-post')}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all"
+            className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all"
           >
             <Plus className="h-4 w-4 mr-2" />
             Create Post
@@ -475,7 +467,7 @@ export default function Dashboard() {
               style={{ perspective: 1000 }}
             >
               <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-sm bg-white/80 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className={`absolute inset-0 bg-gradient-to-br ${metric.color} opacity-0 hover:opacity-5 transition-opacity`}></div>
+                <div className={`absolute inset-0 bg-linear-to-br ${metric.color} opacity-0 hover:opacity-5 transition-opacity`}></div>
                 
                 <CardContent className="p-6 relative">
                   <div className="flex items-center justify-between mb-4">
@@ -519,8 +511,8 @@ export default function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-gradient-to-br from-white/90 to-white/70 shadow-2xl">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-200 to-blue-200 rounded-full blur-3xl opacity-20"></div>
+        <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-linear-to-br from-white/90 to-white/70 shadow-2xl">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-purple-200 to-blue-200 rounded-full blur-3xl opacity-20"></div>
           
           <CardContent className="p-6 relative">
             <div className="flex items-center gap-2 mb-6">
@@ -563,8 +555,8 @@ export default function Dashboard() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-gradient-to-br from-white/90 to-white/70 shadow-2xl">
-            <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-gradient-to-br from-blue-200 to-purple-200 rounded-full blur-3xl opacity-20"></div>
+          <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-linear-to-br from-white/90 to-white/70 shadow-2xl">
+            <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-linear-to-br from-blue-200 to-purple-200 rounded-full blur-3xl opacity-20"></div>
             
             <CardContent className="p-6 relative">
               <div className="flex items-center justify-between mb-6">
@@ -590,7 +582,7 @@ export default function Dashboard() {
                       className="group"
                     >
                       <div className="relative overflow-hidden flex items-center justify-between p-4 rounded-xl bg-white/70 backdrop-blur-sm border-2 border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all">
-                        <div className={`absolute inset-0 bg-gradient-to-r ${platform.color} opacity-0 group-hover:opacity-10 transition-opacity`}></div>
+                        <div className={`absolute inset-0 bg-linear-to-r ${platform.color} opacity-0 group-hover:opacity-10 transition-opacity`}></div>
                         
                         <div className="flex items-center gap-4 relative">
                           <motion.div 
@@ -641,8 +633,8 @@ export default function Dashboard() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-gradient-to-br from-white/90 to-white/70 shadow-2xl h-full">
-            <div className="absolute -top-20 -left-20 w-48 h-48 bg-gradient-to-br from-green-200 to-emerald-200 rounded-full blur-3xl opacity-20"></div>
+          <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-linear-to-br from-white/90 to-white/70 shadow-2xl h-full">
+            <div className="absolute -top-20 -left-20 w-48 h-48 bg-linear-to-br from-green-200 to-emerald-200 rounded-full blur-3xl opacity-20"></div>
             
             <CardContent className="p-6 relative">
               <div className="flex items-center justify-between mb-6">
@@ -694,8 +686,8 @@ export default function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
       >
-        <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-gradient-to-br from-white/90 to-white/70 shadow-2xl">
-          <div className="absolute top-1/2 right-0 w-64 h-64 bg-gradient-to-br from-pink-200 to-rose-200 rounded-full blur-3xl opacity-20"></div>
+        <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-linear-to-br from-white/90 to-white/70 shadow-2xl">
+          <div className="absolute top-1/2 right-0 w-64 h-64 bg-linear-to-br from-pink-200 to-rose-200 rounded-full blur-3xl opacity-20"></div>
           
           <CardContent className="p-6 relative">
             <div className="flex items-center justify-between mb-6">
@@ -718,7 +710,7 @@ export default function Dashboard() {
                     <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2">
-                          <Badge className="capitalize bg-gradient-to-r from-blue-100 to-purple-100 text-gray-900 border-0">
+                          <Badge className="capitalize bg-linear-to-r from-blue-100 to-purple-100 text-gray-900 border-0">
                             {post.platform}
                           </Badge>
                           <span className="text-xs text-gray-500 font-medium">{post.time}</span>
@@ -769,8 +761,8 @@ export default function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
       >
-        <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-gradient-to-br from-white/90 to-white/70 shadow-2xl">
-          <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-br from-indigo-200 to-cyan-200 rounded-full blur-3xl opacity-20"></div>
+        <Card className="relative overflow-hidden border-2 border-white/50 backdrop-blur-md bg-linear-to-br from-white/90 to-white/70 shadow-2xl">
+          <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-linear-to-br from-indigo-200 to-cyan-200 rounded-full blur-3xl opacity-20"></div>
           
           <CardContent className="p-6 relative">
             <div className="flex items-center justify-between mb-6">
@@ -781,7 +773,7 @@ export default function Dashboard() {
             </div>
 
             <motion.div 
-              className="h-64 flex items-center justify-center bg-gradient-to-br from-white/50 to-gray-50/50 backdrop-blur-sm rounded-2xl border-2 border-dashed border-gray-300"
+              className="h-64 flex items-center justify-center bg-linear-to-br from-white/50 to-gray-50/50 backdrop-blur-sm rounded-2xl border-2 border-dashed border-gray-300"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >

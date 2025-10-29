@@ -425,7 +425,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Color Scheme
 - **Primary**: Blue gradient (customizable)
-- **Sidebar**: Light/dark theme support
+- **Sidebar**: Light and Dark theme 
 - **Active States**: Blue (#3B82F6)
 - **Accent Colors**: Fully customizable via CSS variables
 
