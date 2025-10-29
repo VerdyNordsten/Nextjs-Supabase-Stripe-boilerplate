@@ -245,13 +245,28 @@ Follow these steps to configure Google OAuth for your application:
 
 Create a storage bucket for user avatar images:
 
-**Create Avatar Bucket**
+**Option 1: Manual Setup (via Dashboard)**
    - Go to Storage in your Supabase dashboard
    - Click "New bucket"
    - **Bucket name**: `avatars`
    - **Public bucket**: Yes (for public access to avatar images)
    - **File size limit**: 5MB (recommended for avatars)
    - **Allowed MIME types**: `image/jpeg`, `image/png`, `image/webp`, `image/gif`
+
+**Option 2: Automated Setup (via SQL)**
+   - Go to the SQL Editor in your Supabase dashboard
+   - Run the SQL script from [`database/avatars_bucket.sql`](database/avatars_bucket.sql)
+   - This script will:
+     - Create the `avatars` bucket with proper configuration
+     - Set up Row Level Security (RLS) policies for user access
+     - Configure permissions for authenticated users and service roles
+     - Allow users to upload/read/update/delete their own avatars
+
+**RLS Policy Features:**
+   - Users can only access their own avatar folder (user_id/*)
+   - Avatar images are publicly readable (for profile display)
+   - Service role has full administrative access
+   - Automatic folder structure based on user ID
 
 #### f. Database Setup
 - Enable Row Level Security (RLS) for all tables
@@ -382,7 +397,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 │       ├── favicon-vercel.ico
 │       └── Google-Logo.png
 ├── database/                     # Database files
-│   └── db_schema_v1.2_with_rpc.sql # Database schema
+│   ├── db_schema_v1.2_with_rpc.sql # Database schema
+│   └── avatars_bucket.sql         # Avatar bucket RLS policies
 ├── components.json               # shadcn/ui configuration
 ├── eslint.config.mjs             # ESLint configuration
 ├── postcss.config.mjs            # PostCSS configuration
