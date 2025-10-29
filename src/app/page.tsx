@@ -59,7 +59,7 @@ export default function LandingPage() {
       <VideoModal
         isOpen={isVideoModalOpen}
         onClose={closeVideoModal}
-        videoId="S1cnQG0-LP4"
+        videoId="3UTMXKg47BM"
       />
     </div>
   );
