@@ -16,7 +16,7 @@ export function CTASection({ onStartTrial, isCreatingTrial }: CTASectionProps) {
           Ready to Transform Your Social Media?
         </h2>
         <p className="text-xl text-white/90 mb-8">
-          Join thousands of creators saving 10+ hours every week with UptoPilot
+          Join thousands of creators saving 10+ hours every week with SaaS Templates
         </p>
         <motion.button
           onClick={onStartTrial}

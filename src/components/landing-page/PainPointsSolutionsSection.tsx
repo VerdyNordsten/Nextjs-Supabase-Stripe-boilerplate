@@ -37,7 +37,7 @@ export function PainPointsSolutionsSection() {
           
           <div>
             <h3 className="text-2xl font-bold text-green-600 mb-6 flex items-center">
-              <FaCheck className="mr-3" /> UptoPilot
+              <FaCheck className="mr-3" /> SaaS Templates
             </h3>
             <div className="space-y-4">
               {solutions.map((solution, index) => (

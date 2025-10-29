@@ -27,7 +27,7 @@ export function HeroSection({ onStartTrial, isCreatingTrial, onOpenVideoModal }:
               </span> in one place.
             </h1>
             <p className="mt-6 text-xl text-slate-600 max-w-3xl mx-auto">
-              Save time and stay consistent with UptoPilot. Schedule, manage, and publish content 
+              Save time and stay consistent with SaaS Templates. Schedule, manage, and publish content 
               across all your social media platforms with AI-powered tools.
             </p>
             

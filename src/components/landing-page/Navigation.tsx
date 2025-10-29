@@ -64,7 +64,7 @@ export function Navigation({ onStartTrial, isCreatingTrial }: NavigationProps) {
               onClick={() => router.push('/')}
               className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent hover:opacity-80 transition"
             >
-              UptoPilot
+              SaaS Templates
             </button>
           </div>
 

@@ -13,7 +13,7 @@ export function ResultsSection() {
             <span className="text-blue-600">No fluff.</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Join thousands of content creators, agencies, and brands who trust UptoPilot 
+            Join thousands of content creators, agencies, and brands who trust SaaS Templates 
             to manage their social media presence.
           </p>
         </div>

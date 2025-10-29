@@ -212,7 +212,7 @@ export default function OnboardingPage() {
           className="text-center pt-8 pb-6"
         >
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
-            Welcome to UptoPilot! 🎉
+            Welcome to SaaS Templates! 🎉
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Let's get your account set up, {userDisplayName}!

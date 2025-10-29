@@ -74,7 +74,7 @@ export function PricingSection({ onStartTrial, isCreatingTrial }: PricingSection
               Why Pay More for Less?
             </h3>
             <p className="text-xl text-slate-600">
-              Compare UptoPilot with other social media management tools
+              Compare SaaS Templates with other social media management tools
             </p>
           </div>
 

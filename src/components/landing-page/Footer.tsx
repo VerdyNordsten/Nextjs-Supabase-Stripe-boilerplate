@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
-              UptoPilot
+              SaaS Templates
             </h3>
             <p className="text-slate-400">
               Schedule, manage, and publish content across all your social media platforms.
@@ -47,7 +47,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-400">
-          <p>&copy; 2024 UptoPilot. All rights reserved.</p>
+          <p>&copy; 2025 SaaS Templates. All rights reserved.</p>
         </div>
       </div>
     </footer>

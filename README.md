@@ -168,6 +168,7 @@ Cloudflare Turnstile provides user-friendly, privacy-preserving bot protection:
    - Invisible to users (no challenges to solve)
    - GDPR and privacy compliant
    - Helps prevent bot attacks and spam
+   - **Development Mode**: Automatically disabled when `NODE_ENV=development` for easier development
 
 ### 5. OAuth Provider Setup (Optional)
 
@@ -184,12 +185,77 @@ Cloudflare Turnstile provides user-friendly, privacy-preserving bot protection:
 - Copy Anon Public Key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - Copy Service Role Secret → `SUPABASE_SERVICE_ROLE_KEY`
 
-#### b. Set up Authentication
+**Target Hostname**: `[your-project].supabase.co` (already configured in next.config.js)
+
+**Note**: The avatar bucket storage URL is already configured in next.config.js:
+- `https://[your-project].supabase.co/storage/v1/object/public/**` (for avatar images)
+
+#### b. Configure URLs in Supabase
+- Go to Project Settings > General > Configuration
+- **Site URL**: Set to your application URL (e.g., `https://yourdomain.com` or `http://localhost:3000` for development)
+- **Redirect URLs**: Add the following URLs:
+  - `http://localhost:3000/` (development)
+  - `https://yourdomain.com/` (production)
+  - `http://localhost:3000/login` (development)
+  - `https://yourdomain.com/login` (production)
+  - `http://localhost:3000/auth/callback/` (development wildcard)
+  - `https://yourdomain.com/auth/callback/` (production wildcard)
+
+#### d. Set up Authentication Providers
 - Go to Authentication > Providers
 - Configure your desired OAuth providers (Google, GitHub, etc.)
 - Update Site URL and Redirect URLs to match your domain
 
-#### c. Database Setup
+#### e. Google OAuth Setup Tutorial
+
+Follow these steps to configure Google OAuth for your application:
+
+1. **Create Google Cloud Project**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select an existing one
+   - Enable the Google+ API and Google OAuth2 API
+
+2. **Create OAuth 2.0 Credentials**
+   - Go to APIs & Services > Credentials
+   - Click "Create Credentials" > "OAuth 2.0 Client ID"
+   - Select "Web application" as the application type
+   - Add authorized JavaScript origins:
+     - `http://localhost:3000` (development)
+     - `https://yourdomain.com` (production)
+   - Add authorized redirect URIs:
+     - `https://[your-project].supabase.co/auth/v1/callback` 
+     - `http://localhost:3000/auth/callback` (development)
+     - `https://yourdomain.com/auth/callback` (production)
+
+3. **Get Google OAuth Credentials**
+   - Copy **Client ID** → Will be used in Supabase
+   - Copy **Client Secret** → Will be used in Supabase
+   - Download the JSON file for backup
+
+4. **Configure Google OAuth in Supabase**
+   - Go to Authentication > Providers > Google
+   - Enable the Google provider
+   - Enter your Google **Client ID** and **Client Secret**
+   - Save the configuration
+
+5. **Test Google OAuth**
+   - Start your development server: `npm run dev`
+   - Try to sign up/login with Google
+   - Verify the redirect works correctly
+
+#### f. Storage Setup - Avatar Bucket
+
+Create a storage bucket for user avatar images:
+
+**Create Avatar Bucket**
+   - Go to Storage in your Supabase dashboard
+   - Click "New bucket"
+   - **Bucket name**: `avatars`
+   - **Public bucket**: Yes (for public access to avatar images)
+   - **File size limit**: 5MB (recommended for avatars)
+   - **Allowed MIME types**: `image/jpeg`, `image/png`, `image/webp`, `image/gif`
+
+#### g. Database Setup
 - Enable Row Level Security (RLS) for all tables
 - Create policies for authenticated users and service roles
 - Run the initial schema from [`database/db_schema_v1.2_with_rpc.sql`](database/db_schema_v1.2_with_rpc.sql)
@@ -203,8 +269,9 @@ Cloudflare Turnstile provides user-friendly, privacy-preserving bot protection:
 
 #### b. Get Required Keys
 - Publishable Key → `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-- Secret Key → `STRIPE_SECRET_KEY`
 - Buy Button ID → `NEXT_PUBLIC_STRIPE_BUTTON_ID`
+- Secret Key → `STRIPE_SECRET_KEY`
+- Price ID → `STRIPE_PRICE_ID`
 
 #### c. Configure Webhooks
 - Add endpoint: `your_url/api/stripe/webhook`

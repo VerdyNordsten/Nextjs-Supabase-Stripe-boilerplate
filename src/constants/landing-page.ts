@@ -15,7 +15,7 @@ export const testimonials = [
     name: "Sarah Johnson",
     role: "Content Creator",
     avatar: "SJ",
-    content: "UptoPilot has transformed how I manage my social media. I save 10+ hours every week!",
+    content: "SaaS Templates has transformed how I manage my social media. I save 10+ hours every week!",
     rating: 5
   },
   {
@@ -114,7 +114,7 @@ export const pricingPlan = {
 
 export const competitorComparison = [
   {
-    name: "UptoPilot",
+    name: "SaaS Templates",
     logo: "🚀",
     price: "$19",
     color: "bg-blue-600",
@@ -211,7 +211,7 @@ export const faqs = [
   },
   {
     question: "What happens after the trial ends?",
-    answer: "After your 7-day trial, you'll automatically be charged $19/month to continue using UptoPilot. You can cancel anytime before the trial ends with no charges."
+    answer: "After your 7-day trial, you'll automatically be charged $19/month to continue using SaaS Templates. You can cancel anytime before the trial ends with no charges."
   },
   {
     question: "Which social media platforms do you support?",
@@ -227,6 +227,6 @@ export const faqs = [
   },
   {
     question: "Do you offer refunds?",
-    answer: "We offer a 30-day money-back guarantee. If you're not satisfied with UptoPilot, contact us within 30 days for a full refund."
+    answer: "We offer a 30-day money-back guarantee. If you're not satisfied with SaaS Templates, contact us within 30 days for a full refund."
   }
 ];

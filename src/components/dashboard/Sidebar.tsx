@@ -117,7 +117,7 @@ export function Sidebar() {
             <Menu className="h-6 w-6 text-gray-900" />
           )}
         </button>
-        <span className="ml-3 text-lg font-bold text-gray-900">UptoPilot</span>
+        <span className="ml-3 text-lg font-bold text-gray-900">SaaS Templates</span>
       </div>
 
       {isMobileMenuOpen && (
@@ -139,7 +139,7 @@ export function Sidebar() {
           <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-blue-400 flex items-center justify-center">
             <Calendar className="h-5 w-5 text-white" />
           </div>
-          <span className="text-lg font-bold text-gray-900">UptoPilot</span>
+          <span className="text-lg font-bold text-gray-900">SaaS Templates</span>
         </Link>
         <button
           onClick={() => setIsMobileMenuOpen(false)}

@@ -11,7 +11,7 @@ export function TestimonialsSection() {
         <div className="text-center mb-12">
           <p className="text-sm font-semibold text-blue-600 mb-2">LOVED BY CREATORS</p>
           <h2 className="text-3xl font-bold text-slate-900">
-            Here's what creators are saying about UptoPilot
+            Here's what creators are saying about SaaS Templates
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
